@@ -1,40 +1,41 @@
 # YaMDb API
 [![Django-app workflow](https://github.com/Redrikh/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)](https://github.com/Redrikh/yamdb_final/actions/workflows/yamdb_workflow.yml)
+***
 Проект YaMDb собирает отзывы пользователей на произведения. Через API администратор может создавать произведения для отзывов, категории и жанры произведений. Пользователям предоставляется возможность писать отзывы на произведения и комментировать их.
 
 ## Workflow состоит из следущих этапов:
-* tests - проверка кода на соответствие PEP8 и прохождение автотестов pytest.
-* build_and_push_to_docker_hub - запускается только при успешном прохождении tests, собирает и заливает образ на DockerHub
-* deploy - запускается только при успешном прохождении build_and_push_to_docker_hub. Создаёт файл с переменными окружения и запускает docker-compose
-* send_message - запускается только при успешном прохождении deploy. Отправляет сообщение о успешном запуске в telegram
+- tests - проверка кода на соответствие PEP8 и прохождение автотестов pytest.
+- build_and_push_to_docker_hub - запускается только при успешном прохождении tests, собирает и заливает образ на DockerHub
+- deploy - запускается только при успешном прохождении build_and_push_to_docker_hub. Создаёт файл с переменными окружения и запускает docker-compose
+- send_message - запускается только при успешном прохождении deploy. Отправляет сообщение о успешном запуске в telegram
 
 ### Запуск workflow:
 #### Подготовка сервера:
-* На боевой сервер нужно установить nginx, docker и docker-compose:
+- На боевой сервер нужно установить nginx, docker и docker-compose:
 ```
 sudo apt install nginx
 sudo apt install docker-io
 sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 ```
-* Создать файлы 
+- Создать файлы:
 ```
 /home/isturnell/docker-compose.yaml
 /home/isturnell/nginx/default.conf
 Можно скопировать их из репозитория /infra/
 ```
-* Разрешить фаерволле подключение к SSH и web:
+- Разрешить фаерволле подключение к SSH и web:
 ```
 sudo ufw allow 'Nginx Full'
 sudo ufw allow OpenSSH 
 ```
-* Остановить nginx:
+- Остановить nginx:
 ```
 sudo sysmctl stop nginx
 ```
 #### Подготовка переменных окружения:
-```
 В репозитории добавить `Settings -> Secrets -> Actions secrets`:
+```
 DB_ENGINE - используемая СУБД (по-умолчанию django.db.backends.postgresql)
 DB_HOST - адрес сервера БД
 DB_NAME - имя БД
@@ -50,7 +51,7 @@ TELEGRAM_TO - ID пользователя telegram, которому будут 
 TELEGRAM_TOKEN - токен бота telegram, который будет рассылать оповещения
 USER - логин пользователя боевого сервера
 ```
-##### Ключ SSH.
+##### Ключ SSH:
 ```
 Скопировать ключ можно с сервера из файла ~/.ssh/id_rsa
 Если его там нет, нужно сгенерировать ключ:
