@@ -9,8 +9,7 @@ services:
       - ./.env
 
   web:
-    image: isturnell/api_yamdb:v1.0
-    build: .
+    image: isturnell/api_yamdb:latest
     restart: always
     volumes:
       - static_value:/app/static/
