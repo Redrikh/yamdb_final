@@ -10,7 +10,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: 130.193.52.11
-          username: ${{ secrets.USER }}
+          username: isturnell
           key: ${{ secrets.SSH_KEY }}
           script: |
             sudo reboot
