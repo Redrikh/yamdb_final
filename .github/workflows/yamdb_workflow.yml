@@ -52,7 +52,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          context: ./infra/
           script: |
             sudo docker-compose stop
             sudo docker-compose rm web
